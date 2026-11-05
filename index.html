@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3SVK NRIC Season 3 - Verification Portal</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #0b132b; color: #fff; text-align: center; padding: 40px 20px; }
+        .container { max-width: 520px; margin: auto; background: #1c2541; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); border: 1px solid #3a506b; }
+        h2 { color: #48cae4; margin-bottom: 5px; }
+        p.subtitle { font-size: 0.9em; color: #cbd5e1; margin-bottom: 25px; }
+        input { width: 80%; padding: 12px; margin: 10px 0; border-radius: 6px; border: 1px solid #48cae4; background: #0b132b; color: #fff; text-align: center; font-size: 1em; }
+        button { padding: 12px 25px; background: #48cae4; border: none; border-radius: 6px; color: #0b132b; font-weight: bold; cursor: pointer; font-size: 1em; margin-top: 10px; }
+        button:hover { background: #00b4d8; }
+        .result { margin-top: 25px; text-align: left; background: #0b132b; padding: 20px; border-radius: 8px; display: none; border-left: 4px solid #48cae4; }
+        .footer { margin-top: 30px; font-size: 0.8em; color: #64748b; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>3SVK Ecosystem Platform</h2>
+    <p class="subtitle">National Research & Innovation Challenge Season 3 Credential Verification</p>
+    
+    <input type="text" id="certId" placeholder="Enter Certificate ID (e.g., 3SVK/NRIC/S3/001)">
+    <br>
+    <button onclick="verifyCertificate()">Verify Credential</button>
+
+    <div id="resultBox" class="result"></div>
+</div>
+
+<div class="footer">
+    Registered MSME: UDYAM-TS-20-0182112 | 3SVK Ecosystem Platform
+</div>
+
+<script>
+    const database = {
+        "3SVK/NRIC/S3/001": {
+            name: "Kalaiyarasu R",
+            college: "SNS College of Engineering (Autonomous)",
+            team: "Ignitedminds",
+            rank: "Rank #1 (National Rank Holder)",
+            challenge: "National Research & Innovation Challenge Season 3",
+            date: "October 28, 2026",
+            status: "Verified & Authentic"
+        }
+    };
+
+    function verifyCertificate() {
+        const id = document.getElementById('certId').value.trim().toUpperCase();
+        const box = document.getElementById('resultBox');
+        box.style.display = 'block';
+
+        if(database[id]) {
+            const data = database[id];
+            box.innerHTML = `<h3 style="color: #48cae4; margin-top: 0;">✅ Status: ${data.status}</h3>
+                             <p><b>Certificate ID:</b> ${id}</p>
+                             <p><b>Participant Name:</b> ${data.name}</p>
+                             <p><b>Institution:</b> ${data.college}</p>
+                             <p><b>Team Name:</b> ${data.team}</p>
+                             <p><b>Achievement:</b> ${data.rank}</p>
+                             <p><b>Event:</b> ${data.challenge}</p>
+                             <p><b>Issue Date:</b> ${data.date}</p>`;
+        } else {
+            box.innerHTML = `<h3 style="color: #ff6b6b; margin-top: 0;">❌ Credential Not Found</h3>
+                             <p>No records match the ID entered. Please check the Certificate ID and try again.</p>`;
+        }
+    }
+</script>
+
+</body>
+</html>
