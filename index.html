@@ -19,7 +19,11 @@
         .btn-linkedin { background: #0a66c2; color: #fff; }
         .btn-whatsapp { background: #25d366; color: #fff; }
         .btn-email { background: #ea4335; color: #fff; }
+        .portal-link { margin-top: 15px; display: block; color: #48cae4; font-size: 0.9em; text-decoration: none; }
+        .portal-link:hover { text-decoration: underline; }
         .footer { margin-top: 30px; font-size: 0.8em; color: #64748b; }
+        .footer a { color: #48cae4; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -36,7 +40,8 @@
 </div>
 
 <div class="footer">
-    Registered MSME: UDYAM-TS-20-0182112 | 3SVK Ecosystem Platform
+    Registered MSME: UDYAM-TS-20-0182112 | 3SVK Ecosystem Platform<br>
+    <a href="https://sites.google.com/view/3svk-research-s3/home" target="_blank" rel="noopener">Visit Season 3 Official Website</a>
 </div>
 
 <script>
@@ -85,9 +90,8 @@
             challenge: "National Research & Innovation Challenge Season 3",
             date: "October 28, 2026",
             status: "Verified & Authentic"
-        }
-    };
-    "3SVK/NRIC/S3/006": {
+        },
+        "3SVK/NRIC/S3/006": {
             name: "Arunachalam G",
             college: "K.S. Rangasamy College Of Technology (KSRCT), Namakkal",
             team: "Code Titans",
@@ -96,6 +100,7 @@
             date: "October 28, 2026",
             status: "Verified & Authentic"
         }
+    };
 
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -135,6 +140,8 @@
                 <p><b>Event:</b> ${data.challenge}</p>
                 <p><b>Issue Date:</b> ${data.date}</p>
                 
+                <a class="portal-link" href="https://sites.google.com/view/3svk-research-s3/home" target="_blank" rel="noopener">🌐 Visit Season 3 Official Website</a>
+
                 <div class="share-actions">
                     <button class="btn-share btn-copy" onclick="copyLink('${shareUrl}')">📋 Copy Link</button>
                     <a class="btn-share btn-linkedin" href="${linkedinUrl}" target="_blank" rel="noopener">LinkedIn</a>
