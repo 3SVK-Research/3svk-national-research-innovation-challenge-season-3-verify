@@ -5,11 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">3SVK NRIC Season 3 - Verification Portal</title>
     
-    <!-- Open Graph / Dynamic Social Media Preview Tags -->
+    <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" id="ogTitle" content="3SVK NRIC Season 3 - Official Verified Credential">
     <meta property="og:description" id="ogDesc" content="Verify official national research and innovation challenge certificates, ranks, and achievements hosted by the 3SVK Ecosystem Platform.">
     <meta property="og:url" id="ogUrl" content="https://3svk-research.github.io/3svk-national-research-innovation-challenge-season-3-verify/">
+    <meta property="og:image" id="ogImage" content="https://3svk-research.github.io/3svk-national-research-innovation-challenge-season-3-verify/assets/preview-banner.png">
     <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="twitterTitle" content="3SVK NRIC Season 3 - Official Verified Credential">
+    <meta name="twitter:description" id="twitterDesc" content="Verify official national research and innovation challenge certificates, ranks, and achievements hosted by the 3SVK Ecosystem Platform.">
+    <meta name="twitter:image" id="twitterImage" content="https://3svk-research.github.io/3svk-national-research-innovation-challenge-season-3-verify/assets/preview-banner.png">
 
     <style>
         body { font-family: Arial, sans-serif; background: #0b132b; color: #fff; text-align: center; padding: 40px 20px; }
@@ -133,11 +140,18 @@
             const shareUrl = `${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(id)}`;
             const shareText = `Check out my verified credential for ${data.challenge} (${data.rank}) - ${data.name} from ${data.college}: ${shareUrl}`;
             
-            // Dynamically update page title and meta descriptions for better sharing previews
+            // Dynamically update page titles and Open Graph meta tags for social crawlers
             document.getElementById('pageTitle').innerText = `${data.name} - ${data.rank} | 3SVK Verification`;
-            document.getElementById('ogTitle').setAttribute('content', `${data.name} secured ${data.rank} in ${data.challenge}`);
-            document.getElementById('ogDesc').setAttribute('content', `Institution: ${data.college} | Team: ${data.team} | Status: ${data.status}`);
+            
+            const ogTitleText = `${data.name} - ${data.rank} (${data.challenge})`;
+            const ogDescText = `Institution: ${data.college} | Team: ${data.team} | Status: ${data.status} | Verified by 3SVK Ecosystem Platform (MSME: UDYAM-TS-20-0182112)`;
+
+            document.getElementById('ogTitle').setAttribute('content', ogTitleText);
+            document.getElementById('ogDesc').setAttribute('content', ogDescText);
             document.getElementById('ogUrl').setAttribute('content', shareUrl);
+
+            document.getElementById('twitterTitle').setAttribute('content', ogTitleText);
+            document.getElementById('twitterDesc').setAttribute('content', ogDescText);
 
             const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
             const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
