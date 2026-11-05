@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3SVK NRIC Season 3 - Verification Portal</title>
+    <title id="pageTitle">3SVK NRIC Season 3 - Verification Portal</title>
+    
+    <!-- Open Graph / Dynamic Social Media Preview Tags -->
+    <meta property="og:title" id="ogTitle" content="3SVK NRIC Season 3 - Official Verified Credential">
+    <meta property="og:description" id="ogDesc" content="Verify official national research and innovation challenge certificates, ranks, and achievements hosted by the 3SVK Ecosystem Platform.">
+    <meta property="og:url" id="ogUrl" content="https://3svk-research.github.io/3svk-national-research-innovation-challenge-season-3-verify/">
+    <meta property="og:type" content="website">
+
     <style>
         body { font-family: Arial, sans-serif; background: #0b132b; color: #fff; text-align: center; padding: 40px 20px; }
         .container { max-width: 520px; margin: auto; background: #1c2541; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); border: 1px solid #3a506b; }
@@ -124,11 +131,17 @@
         if(records[id]) {
             const data = records[id];
             const shareUrl = `${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(id)}`;
-            const shareText = `Check out my verified credential for ${data.challenge} (${data.rank}): ${shareUrl}`;
+            const shareText = `Check out my verified credential for ${data.challenge} (${data.rank}) - ${data.name} from ${data.college}: ${shareUrl}`;
             
+            // Dynamically update page title and meta descriptions for better sharing previews
+            document.getElementById('pageTitle').innerText = `${data.name} - ${data.rank} | 3SVK Verification`;
+            document.getElementById('ogTitle').setAttribute('content', `${data.name} secured ${data.rank} in ${data.challenge}`);
+            document.getElementById('ogDesc').setAttribute('content', `Institution: ${data.college} | Team: ${data.team} | Status: ${data.status}`);
+            document.getElementById('ogUrl').setAttribute('content', shareUrl);
+
             const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
             const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
-            const emailUrl = `mailto:?subject=${encodeURIComponent("My 3SVK NRIC Season 3 Verified Credential")}&body=${encodeURIComponent("Hello,\n\nYou can view my verified certificate and achievement details here:\n\n" + shareUrl)}`;
+            const emailUrl = `mailto:?subject=${encodeURIComponent("My 3SVK NRIC Season 3 Verified Credential - " + data.name)}&body=${encodeURIComponent("Hello,\n\nYou can view my verified certificate and achievement details here:\n\n" + shareUrl)}`;
 
             box.innerHTML = `
                 <h3 style="color: #48cae4; margin-top: 0;">✅ Status: ${data.status}</h3>
