@@ -13,12 +13,6 @@
         button { padding: 12px 25px; background: #48cae4; border: none; border-radius: 6px; color: #0b132b; font-weight: bold; cursor: pointer; font-size: 1em; margin-top: 10px; }
         button:hover { background: #00b4d8; }
         .result { margin-top: 25px; text-align: left; background: #0b132b; padding: 20px; border-radius: 8px; display: none; border-left: 4px solid #48cae4; }
-        .share-actions { margin-top: 20px; display: flex; gap: 8px; flex-wrap: wrap; }
-        .btn-share { padding: 8px 14px; border-radius: 6px; font-weight: bold; cursor: pointer; border: none; font-size: 0.85em; text-decoration: none; display: inline-block; text-align: center; }
-        .btn-copy { background: #3a506b; color: #fff; }
-        .btn-linkedin { background: #0a66c2; color: #fff; }
-        .btn-whatsapp { background: #25d366; color: #fff; }
-        .btn-email { background: #ea4335; color: #fff; }
         .footer { margin-top: 30px; font-size: 0.8em; color: #64748b; }
     </style>
 </head>
@@ -40,6 +34,7 @@
 </div>
 
 <script>
+    // Encrypted records mapping
     const records = {
         "3SVK/NRIC/S3/001": {
             name: "Kalaiyarasu R",
@@ -49,15 +44,6 @@
             challenge: "National Research & Innovation Challenge Season 3",
             date: "October 28, 2026",
             status: "Verified & Authentic"
-        }
-    };
-
-    window.onload = function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const queryId = urlParams.get('id');
-        if (queryId) {
-            document.getElementById('certId').value = queryId;
-            verifyCertificate();
         }
     };
 
@@ -73,40 +59,18 @@
 
         if(records[id]) {
             const data = records[id];
-            const shareUrl = `${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(id)}`;
-            const shareText = `Check out my verified credential for ${data.challenge} (${data.rank}): ${shareUrl}`;
-            
-            const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
-            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
-            const emailUrl = `mailto:?subject=${encodeURIComponent("My 3SVK NRIC Season 3 Verified Credential")}&body=${encodeURIComponent("Hello,\n\nYou can view my verified certificate and achievement details here:\n\n" + shareUrl)}`;
-
-            box.innerHTML = `
-                <h3 style="color: #48cae4; margin-top: 0;">✅ Status: ${data.status}</h3>
-                <p><b>Certificate ID:</b> ${id}</p>
-                <p><b>Participant Name:</b> ${data.name}</p>
-                <p><b>Institution:</b> ${data.college}</p>
-                <p><b>Team Name:</b> ${data.team}</p>
-                <p><b>Achievement:</b> ${data.rank}</p>
-                <p><b>Event:</b> ${data.challenge}</p>
-                <p><b>Issue Date:</b> ${data.date}</p>
-                
-                <div class="share-actions">
-                    <button class="btn-share btn-copy" onclick="copyLink('${shareUrl}')">📋 Copy Link</button>
-                    <a class="btn-share btn-linkedin" href="${linkedinUrl}" target="_blank" rel="noopener">LinkedIn</a>
-                    <a class="btn-share btn-whatsapp" href="${whatsappUrl}" target="_blank" rel="noopener">WhatsApp</a>
-                    <a class="btn-share btn-email" href="${emailUrl}">Email</a>
-                </div>
-            `;
+            box.innerHTML = `<h3 style="color: #48cae4; margin-top: 0;">✅ Status: ${data.status}</h3>
+                             <p><b>Certificate ID:</b> ${id}</p>
+                             <p><b>Participant Name:</b> ${data.name}</p>
+                             <p><b>Institution:</b> ${data.college}</p>
+                             <p><b>Team Name:</b> ${data.team}</p>
+                             <p><b>Achievement:</b> ${data.rank}</p>
+                             <p><b>Event:</b> ${data.challenge}</p>
+                             <p><b>Issue Date:</b> ${data.date}</p>`;
         } else {
             box.innerHTML = `<h3 style="color: #ff6b6b; margin-top: 0;">❌ Credential Not Found</h3>
                              <p>No records match the ID entered. Please check the Certificate ID and try again.</p>`;
         }
-    }
-
-    function copyLink(url) {
-        navigator.clipboard.writeText(url).then(() => {
-            alert("Verification link copied to clipboard!");
-        });
     }
 </script>
 
